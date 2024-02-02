@@ -1,9 +1,11 @@
+package Methods_Lab;
+
 import java.util.Scanner;
 
-public class SignOfIntegerNumbers_01 {
+public class Grades_02 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-
+        
     }
 }
