@@ -28,7 +28,7 @@ public class ListManipulationBasics_01 {
             if (commandStrings[0].equals("Add")){
                 listNumbers.add(Integer.parseInt(commandStrings[1]));
             } else if (commandStrings[0].equals("Remove")) {
-                listNumbers.remove(Integer.parseInt(commandStrings[1]));
+                listNumbers.remove(Integer.valueOf(commandStrings[1]));
             } else if (commandStrings[0].equals("RemoveAt")){
                 listNumbers.remove(Integer.parseInt(commandStrings[1]));
             } else if (commandStrings[0].equals("Insert")){
