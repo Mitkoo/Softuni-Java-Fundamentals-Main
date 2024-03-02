@@ -11,9 +11,9 @@ public class ManOWar_03 {
         Scanner scanner = new Scanner(System.in);
 
         List<Integer> statusPirateShip = new ArrayList<>();
-        statusPirateShip = Arrays.stream(scanner.nextLine().split(" ")).map(Integer::parseInt).collect(Collectors.toList());
+        statusPirateShip = Arrays.stream(scanner.nextLine().split(">")).map(Integer::parseInt).collect(Collectors.toList());
         List<Integer> statusWarShip = new ArrayList<>();
-        statusWarShip = Arrays.stream(scanner.nextLine().split(" ")).map(Integer::parseInt).collect(Collectors.toList());
+        statusWarShip = Arrays.stream(scanner.nextLine().split(">")).map(Integer::parseInt).collect(Collectors.toList());
         int maxSectionHealth = Integer.parseInt(scanner.nextLine());
 
         String commandLine = scanner.nextLine();
@@ -21,12 +21,12 @@ public class ManOWar_03 {
 
         while (!commandLine.equals("Retire")) {
 
-            List<String> commandLineList = Arrays.stream(scanner.nextLine().split(" ")).collect(Collectors.toList());
+            List<String> commandLineList = Arrays.stream(commandLine.split(" ")).collect(Collectors.toList());
 
             if (commandLineList.get(0).equals("Fire")) {
 
                 if (checkIndexValid(Integer.parseInt(commandLineList.get(1)), statusWarShip)) {
-                    int damage = Integer.parseInt(commandLineList.get(1)) - Integer.parseInt(commandLineList.get(2));
+                    int damage = statusWarShip.get(Integer.parseInt(commandLineList.get(1))) - Integer.parseInt(commandLineList.get(2));
                     if (damage <= 0) {
                         System.out.println("You won! The enemy ship has sunken.");
                         battleEnd = true;
@@ -36,13 +36,21 @@ public class ManOWar_03 {
 
             } else if (commandLineList.get(0).equals("Defend")) {
 
-                if (checkIndexValid(Integer.parseInt(commandLineList.get(1)), statusWarShip)) {
-                    int damage = Integer.parseInt(commandLineList.get(1)) - Integer.parseInt(commandLineList.get(2));
-                    if (damage <= 0) {
-                        System.out.println("You lost! The pirate ship has sunken.");
-                        battleEnd = true;
-                        break;
+                if (checkIndexValid(Integer.parseInt(commandLineList.get(1)), statusWarShip) && checkIndexValid(Integer.parseInt(commandLineList.get(2)), statusWarShip)) {
+                    int damage = 0;
+
+                    for (int i = Integer.parseInt(commandLineList.get(1)); i <= Integer.parseInt(commandLineList.get(2)); i++){
+
+                        damage = statusPirateShip.get(i) - Integer.parseInt(commandLineList.get(3));
+
+                        if (damage <= 0) {
+                            System.out.println("You lost! The pirate ship has sunken.");
+                            battleEnd = true;
+                            break;
+                        }
                     }
+
+
                 }
 
             } else if (commandLineList.get(0).equals("Repair")) {
@@ -66,13 +74,13 @@ public class ManOWar_03 {
                 }
 
                 if (count > 0){
-                    System.out.printf("%d sections need repair.", count);
+                    System.out.printf("\n%d sections need repair.", count);
                 }
             }
             commandLine = scanner.nextLine();
         }
 
-        if (battleEnd = false){
+        if (battleEnd == false){
 
             int pirateShipStatus = status(statusPirateShip);
             int warShipStatus = status(statusWarShip);
