@@ -4,6 +4,6 @@ public class NeedForSpeed3_03 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-
+        
     }
 }

@@ -28,13 +28,13 @@ public class EmojiDetector_02 {
         String regex1 = "(?<number>[0-9])";
         pattern = Pattern.compile(regex1);
         matcher = pattern.matcher(input);
-        List<Integer> intList = new ArrayList<>();
+        List<Double> intList = new ArrayList<>();
 
         while (matcher.find()){
-            intList.add(Integer.parseInt(matcher.group("number")));
+            intList.add(Double.parseDouble(matcher.group("number")));
         }
 
-        double coolThreshold = intList.stream().reduce(1, (a, b) -> a * b);
+        double coolThreshold = intList.stream().reduce(1.0, (a, b) -> a * b);
 
         System.out.printf("Cool threshold: %.0f\n", coolThreshold);
         System.out.printf("%d emojis found in the text. The cool ones are:\n", strList.size());

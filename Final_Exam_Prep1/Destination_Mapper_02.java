@@ -9,14 +9,14 @@ public class Destination_Mapper_02 {
         String inLocations = scanner.nextLine();
         List<String> locationsList = new ArrayList<>();
 
-        //[\/|=]([A-Z][a-z]{2,})[\/|=]
-        Pattern pattern = Pattern.compile("[\\/|=]([A-Z][a-z]{2,})[\\/|=]");
+        //\/(?<destinationName>[A-Z][a-z]{2,})\/|\=(?<destinationName1>[A-Z][a-z]{2,})\=
+        Pattern pattern = Pattern.compile("\\/(?<destinationName>[A-Z][a-z]{2,})\\/|\\=(?<destinationName1>[A-Z][a-z]{2,})\\=");
         Matcher matcher = pattern.matcher(inLocations);
 
         while (matcher.find()) {
-            if (!matcher.group(1).equals("Invalid")) {
-                String locationMatched = matcher.group(1);
-                locationsList.add(locationMatched);
+            if (!matcher.group(0).equals("Invalid")) {
+                String locationMatched = matcher.group(0);
+                locationsList.add(locationMatched.replace("/","").replace("=",""));
             }
         }
         //calc the travel points
